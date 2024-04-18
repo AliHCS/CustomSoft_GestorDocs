@@ -1,0 +1,19 @@
+{
+  "documentos": [
+    {
+      "id": 1,
+      "titulo": "Documento 1",
+      "contenido": "Contenido del documento 1"
+    },
+    {
+      "id": 2,
+      "titulo": "Documento 2",
+      "contenido": "Contenido del documento 2"
+    },
+    {
+      "id": 3,
+      "titulo": "Documento 3",
+      "contenido": "Contenido del documento 3"
+    }
+  ]
+}
