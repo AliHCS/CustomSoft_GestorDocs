@@ -14,6 +14,8 @@
       :items="items"
       title="Mi tabla"
       :showActions="true"
+      @onEditAction="emitActionEdit"
+      @onDeleteAction="emitDeleteAction"
     />
   </v-container>
 </template>
@@ -111,6 +113,13 @@ const items = [
     stock: false,
   },
 ];
+
+const emitActionEdit = (item: any) => {
+  console.log(item);
+};
+const emitDeleteAction = (item: any) => {
+  console.log(item);
+};
 </script>
 
 <style scoped></style>

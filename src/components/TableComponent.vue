@@ -1,7 +1,6 @@
 <template>
   <v-card flat>
     <v-card-title class="d-flex align-center pe-2">
-      <v-icon icon="mdi-video-input-component"></v-icon> &nbsp;
       {{ props.title }}
 
       <v-spacer></v-spacer>
@@ -28,8 +27,12 @@
         </v-card>
       </template>
       <template v-if="props.showActions" v-slot:item.actions="{ item }">
-        <v-icon class="me-2" size="small"> mdi-pencil </v-icon>
-        <v-icon size="small"> mdi-delete </v-icon>
+        <v-icon class="me-2" size="small" @click="emit('onEditAction', item)">
+          mdi-pencil
+        </v-icon>
+        <v-icon size="small" @click="emit('onDeleteAction', item)">
+          mdi-delete
+        </v-icon>
       </template>
       <template v-slot:no-data>
         <v-btn color="primary"> Reset </v-btn>
@@ -60,6 +63,8 @@ const props = defineProps({
     default: false,
   },
 });
+
+const emit = defineEmits(["onEditAction", "onDeleteAction"]);
 
 const search = ref("");
 
