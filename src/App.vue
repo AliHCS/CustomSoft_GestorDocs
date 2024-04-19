@@ -1,25 +1,38 @@
 <script setup lang="ts">
-import HelloWorld from "./components/HelloWorld.vue";
+import { ref } from "vue";
+import HeaderComponent from "@/layouts/HeaderComponent.vue";
 import { getDocs } from "@/api/documents";
+import { Documento } from "@/utils/interfaces/documents";
+
+const documentos = ref<Documento[]>([]);
 
 const getDocsFunction = async () => {
-  const { data } = await getDocs();
-  console.log(data);
+  try {
+    const { data } = await getDocs();
+    documentos.value = data;
+    console.log(documentos.value);
+  } catch (error) {
+    console.error("Error al obtener documentos:", error);
+  }
 };
 getDocsFunction();
 </script>
 
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-  <v-btn> Button </v-btn>
+  <VApp>
+    <VMain>
+      <div>
+        <HeaderComponent />
+        <a href="https://vitejs.dev" target="_blank">
+          <img src="/vite.svg" class="logo" alt="Vite logo" />
+        </a>
+        <a href="https://vuejs.org/" target="_blank">
+          <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
+        </a>
+        <v-btn> Button </v-btn>
+      </div>
+    </VMain>
+  </VApp>
 </template>
 
 <style scoped>
