@@ -1,35 +1,28 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <v-app-bar color="teal-darken-4">
-      <template v-slot:image>
-        <v-img
-          gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"
-        ></v-img>
-      </template>
+  <v-app-bar color="primary" prominent>
+    <v-app-bar-nav-icon
+      variant="text"
+      @click.stop="drawer = !drawer"
+    ></v-app-bar-nav-icon>
 
-      <template v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      </template>
+    <v-toolbar-title>My files</v-toolbar-title>
 
-      <v-app-bar-title>Title</v-app-bar-title>
+    <v-spacer></v-spacer>
 
-      <v-spacer></v-spacer>
+    <template v-if="$vuetify.display.mdAndUp">
+      <v-btn icon="mdi-magnify" variant="text"></v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <v-btn icon="mdi-filter" variant="text"></v-btn>
+    </template>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
-    </v-app-bar>
-  </div>
+    <v-btn icon="mdi-dots-vertical" variant="text"></v-btn>
+  </v-app-bar>
+  <SideBarComponent :drawer="drawer" />
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import { ref } from "vue";
+import SideBarComponent from "@/layouts/SideBarComponent.vue";
+
+const drawer = ref<boolean>(false);
+</script>

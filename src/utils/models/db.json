@@ -2,18 +2,27 @@
   "documentos": [
     {
       "id": 1,
-      "titulo": "Documento 1",
-      "contenido": "Contenido del documento 1"
+      "name": "Informe Trimestral",
+      "description": "Informe detallado de actividades del trimestre",
+      "extension": "pdf",
+      "document": "informe_trimestral.pdf",
+      "date": "2024-03-31"
     },
     {
       "id": 2,
-      "titulo": "Documento 2",
-      "contenido": "Contenido del documento 2"
+      "name": "Resumen Ejecutivo",
+      "description": "Resumen de resultados del último mes",
+      "extension": "docx",
+      "document": "resumen_ejecutivo.docx",
+      "date": "2024-04-15"
     },
     {
       "id": 3,
-      "titulo": "Documento 3",
-      "contenido": "Contenido del documento 3"
+      "name": "Análisis Financiero",
+      "description": "Análisis detallado de los estados financieros",
+      "extension": "pdf",
+      "document": "analisis_financiero.pdf",
+      "date": "2024-04-10"
     }
   ]
 }

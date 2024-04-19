@@ -1,53 +1,48 @@
-<script setup lang="ts">
-import { ref } from "vue";
-
-const drawer = ref(true);
-const rail = ref(true);
-</script>
-
 <template>
-  <div style="height: 100vh">
-    <v-navigation-drawer
-      v-model="drawer"
-      :rail="rail"
-      permanent
-      @click="rail = false"
-    >
-      <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
-        title="John Leider"
-        nav
-      >
-        <template v-slot:append>
-          <v-btn
-            icon="mdi-chevron-left"
-            variant="text"
-            @click.stop="rail = !rail"
-          ></v-btn>
-        </template>
-      </v-list-item>
+  <v-navigation-drawer
+    v-model="props.drawer"
+    :location="$vuetify.display.mobile ? 'top' : undefined"
+    temporary
+    sticky
+  >
+    <v-card class="mx-auto" max-width="300">
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :value="item"
+          color="primary"
+          @click="navigateTo(item.route)"
+        >
+          <template v-slot:prepend></template>
 
-      <v-divider></v-divider>
-
-      <v-list density="compact" nav>
-        <v-list-item
-          prepend-icon="mdi-home-city"
-          title="Home"
-          value="home"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-account"
-          title="My Account"
-          value="account"
-        ></v-list-item>
-        <v-list-item
-          prepend-icon="mdi-account-group-outline"
-          title="Users"
-          value="users"
-        ></v-list-item>
+          <v-list-item-title v-text="item.title"></v-list-item-title>
+        </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-  </div>
+    </v-card>
+  </v-navigation-drawer>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+import { items } from "@/utils/models/dataSideBar.ts";
+
+const props = defineProps({
+  drawer: {
+    type: Boolean,
+  },
+});
+
+const router = useRouter();
+const navigateTo = (route: string) => {
+  router.push(route); // Navegar a la ruta usando el router de Vue
+};
+</script>
+
+<style scoped>
+.router-link-item {
+  cursor: pointer; /* Establecer el cursor como puntero */
+  color: inherit; /* Heredar el color del texto */
+  text-decoration: none; /* Quitar la subrayado predeterminado */
+}
+</style>

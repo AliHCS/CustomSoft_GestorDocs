@@ -1,7 +1,10 @@
 export interface Documento {
   id: number;
-  titulo: string;
-  contenido: string;
+  name: string;
+  description: string;
+  extension: string;
+  document: string;
+  date: string;
 }
 
 export interface Datos {
