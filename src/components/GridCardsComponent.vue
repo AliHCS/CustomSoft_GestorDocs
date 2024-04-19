@@ -38,8 +38,9 @@
 
               <v-btn
                 color="medium-emphasis"
-                icon="mdi-share-variant"
+                icon="mdi-account-circle"
                 size="small"
+                variant="text"
               ></v-btn>
             </v-card-actions>
           </v-card>
