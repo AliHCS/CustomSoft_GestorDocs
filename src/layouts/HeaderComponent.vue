@@ -5,7 +5,7 @@
       @click.stop="drawer = !drawer"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title>My files</v-toolbar-title>
+    <v-toolbar-title>Sistema de Gestion de Documentos</v-toolbar-title>
 
     <v-spacer></v-spacer>
 

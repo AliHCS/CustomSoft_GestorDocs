@@ -2,8 +2,8 @@
   <v-navigation-drawer
     v-model="props.drawer"
     :location="$vuetify.display.mobile ? 'top' : undefined"
-    temporary
-    sticky
+    absolute
+    disable-resize-watcher
   >
     <v-card class="mx-auto" max-width="300">
       <v-list>
@@ -39,10 +39,4 @@ const navigateTo = (route: string) => {
 };
 </script>
 
-<style scoped>
-.router-link-item {
-  cursor: pointer; /* Establecer el cursor como puntero */
-  color: inherit; /* Heredar el color del texto */
-  text-decoration: none; /* Quitar la subrayado predeterminado */
-}
-</style>
+<style scoped></style>

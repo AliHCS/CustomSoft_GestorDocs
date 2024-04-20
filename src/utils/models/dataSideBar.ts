@@ -1,12 +1,12 @@
 export const items = [
   {
+    title: "Home",
+    route: "/",
+  },
+  {
     title: "Documentos",
     value: "foo",
     route: "/documentos",
-  },
-  {
-    title: "Bar",
-    route: "/",
   },
   {
     title: "Fizz",
