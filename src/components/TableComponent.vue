@@ -16,7 +16,11 @@
         single-line
       ></v-text-field>
     </v-card-title>
-    <v-data-table :headers="displayedHeaders" :items="props.items">
+    <v-data-table
+      :headers="displayedHeaders"
+      :items="props.items"
+      items-per-page="5"
+    >
       <template v-slot:item.image="{ item }">
         <v-card class="my-2" elevation="2" rounded>
           <v-img

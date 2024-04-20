@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import TableComponent from "@/components/TableComponent.vue";
+/* import TableCustomPaginateComponent from "@/components/TableCustomPaginateComponent.vue"; */
 import { getDocs } from "@/api/documents";
 import { Documento } from "@/utils/interfaces/documents";
 
@@ -76,6 +77,14 @@ getDocsFunction();
       @onEditAction="emitActionEdit"
       @onDeleteAction="emitDeleteAction"
     />
+    <!--   <TableCustomPaginateComponent
+      :headers="headers"
+      :items="documentos"
+      title="Reporte Documentos"
+      :showActions="true"
+      @onEditAction="emitActionEdit"
+      @onDeleteAction="emitDeleteAction"
+    /> -->
   </div>
 </template>
 
