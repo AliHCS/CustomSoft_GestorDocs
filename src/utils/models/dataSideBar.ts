@@ -1,19 +1,18 @@
 export const items = [
   {
     title: "Home",
-    route: "/",
+    route: "Home", // Ruta raíz
   },
   {
     title: "Documentos",
-    value: "foo",
-    route: "/documentos",
+    route: "DocumentosIndex", // Ruta para DocumentosIndex
   },
   {
-    title: "Fizz",
-    route: "/",
+    title: "Nuevo Reporte",
+    route: "DocumentosCreate", // Ruta para DocumentosCreate
   },
   {
     title: "Buzz",
-    route: "/",
+    route: "/", // Otra ruta (esto es un ejemplo, asegúrate de tener rutas válidas aquí)
   },
 ];

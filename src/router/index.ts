@@ -1,5 +1,3 @@
-// router/index.ts
-
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "./routes"; // Importa las rutas desde el archivo routes.ts
 

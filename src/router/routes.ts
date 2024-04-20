@@ -1,16 +1,10 @@
-// router/routes.ts
-
 import { RouteRecordRaw } from "vue-router";
-// Importa tu layout principal
-import {
-  HomeView,
-  DocumentosIndex /* DocumentCreate */,
-} from "@/router/exports";
+import { HomeView, DocumentosIndex, DocumentosCreate } from "@/router/exports";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
-    component: () => import("@/layouts/LayoutComponent.vue"), // Usa el layout principal
+    component: () => import("@/layouts/LayoutComponent.vue"),
     children: [
       {
         path: "", // Ruta vacía que corresponderá a `/`
@@ -19,18 +13,14 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/documentos",
+        name: "DocumentosIndex",
         component: DocumentosIndex,
         children: [
           {
-            path: "", // Ruta vacía que corresponderá a `/documentos`
-            name: "documentos",
-            component: DocumentosIndex,
-          },
-          /* {
             path: "create", // Subruta que corresponderá a `/documentos/create`
-            name: "documentosCreate",
-            component: DocumentCreate,
-          }, */
+            name: "DocumentosCreate",
+            component: DocumentosCreate,
+          },
           // Otras subrutas de documentos, si las hay
         ],
       },
