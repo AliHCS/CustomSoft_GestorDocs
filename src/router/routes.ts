@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import { HomeView, DocumentosIndex, DocumentosCreate } from "@/router/exports";
+import { HomeView, DocumentosRoutes } from "@/router/exports";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -12,17 +12,9 @@ const routes: RouteRecordRaw[] = [
         component: HomeView,
       },
       {
-        path: "/documentos",
-        name: "DocumentosIndex",
-        component: DocumentosIndex,
-        children: [
-          {
-            path: "create", // Subruta que corresponderá a `/documentos/create`
-            name: "DocumentosCreate",
-            component: DocumentosCreate,
-          },
-          // Otras subrutas de documentos, si las hay
-        ],
+        path: "documentos",
+        name: "documentos",
+        children: DocumentosRoutes,
       },
       // Otras rutas de tu aplicación
     ],

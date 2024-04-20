@@ -1,10 +1,11 @@
 export interface Documento {
-  id: number;
+  id: number | string;
   name: string;
   description: string;
   extension: string;
   document: string;
   date: string;
+  file: File[] | undefined;
 }
 
 export interface Datos {

@@ -1,5 +1,4 @@
 import HomeView from "@/views/HomeView.vue";
-import DocumentosIndex from "@/views/Documentos/DocumentosIndex.vue";
-import DocumentosCreate from "@/views/Documentos/DocumentosCreate.vue";
+import { DocumentosRoutes } from "@/router/documentos.ts";
 
-export { HomeView, DocumentosIndex, DocumentosCreate };
+export { HomeView, DocumentosRoutes };

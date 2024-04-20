@@ -5,11 +5,11 @@ export const items = [
   },
   {
     title: "Documentos",
-    route: "DocumentosIndex", // Ruta para DocumentosIndex
+    route: "index-documentos", // Ruta para DocumentosIndex
   },
   {
     title: "Nuevo Reporte",
-    route: "DocumentosCreate", // Ruta para DocumentosCreate
+    route: "crear-documentos", // Ruta para DocumentosCreate
   },
   {
     title: "Buzz",
