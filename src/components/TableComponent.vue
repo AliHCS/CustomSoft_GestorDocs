@@ -16,20 +16,12 @@
         single-line
       ></v-text-field>
     </v-card-title>
+
     <v-data-table
       :headers="displayedHeaders"
-      :items="props.items"
+      :items="filteredItems"
       items-per-page="5"
     >
-      <template v-slot:item.image="{ item }">
-        <v-card class="my-2" elevation="2" rounded>
-          <v-img
-            :src="`https://cdn.vuetifyjs.com/docs/images/graphics/gpus/${item.image}`"
-            height="64"
-            cover
-          ></v-img>
-        </v-card>
-      </template>
       <template v-if="props.showActions" v-slot:item.actions="{ item }">
         <v-icon class="me-2" size="small" @click="emit('onEditAction', item)">
           mdi-pencil
@@ -66,6 +58,11 @@ const props = defineProps({
     required: false,
     default: false,
   },
+  searchProperties: {
+    type: Array as () => string[],
+    default: () => ["name", "description"],
+    required: false,
+  },
 });
 
 const emit = defineEmits(["onEditAction", "onDeleteAction"]);
@@ -76,5 +73,18 @@ const displayedHeaders = computed(() => {
   return props.showActions
     ? props.headers
     : props.headers.filter((header) => header.key !== "actions");
+});
+
+const filteredItems = computed(() => {
+  if (!search.value) {
+    return props.items;
+  }
+  const searchTerm = search.value.toLowerCase();
+  return props.items.filter((item) => {
+    return props.searchProperties.some((prop) => {
+      // Verificar si alguna de las propiedades contiene el término de búsqueda
+      return item[prop] && item[prop].toLowerCase().includes(searchTerm);
+    });
+  });
 });
 </script>

@@ -64,6 +64,8 @@ const emitDeleteAction = (item: any) => {
   console.log(item);
 };
 
+const searchProperties = ref<string[]>(["extension", "document"]);
+
 getDocsFunction();
 </script>
 
@@ -74,6 +76,7 @@ getDocsFunction();
       :items="documentos"
       title="Reporte Documentos"
       :showActions="true"
+      :searchProperties="searchProperties"
       @onEditAction="emitActionEdit"
       @onDeleteAction="emitDeleteAction"
     />
