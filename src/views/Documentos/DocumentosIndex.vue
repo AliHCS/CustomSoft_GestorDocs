@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import router from "@/router";
 import TableComponent from "@/components/TableComponent.vue";
 /* import TableCustomPaginateComponent from "@/components/TableCustomPaginateComponent.vue"; */
 import { getDocs } from "@/api/documents";
@@ -57,8 +58,9 @@ const headers = [
   { title: "Actions", key: "actions", sortable: false },
 ];
 
-const emitActionEdit = (item: any) => {
-  console.log(item);
+const handleEdit = (data: Documento) => {
+  console.log(data.id);
+  router.push({ name: "editar-documentos", params: { id: data.id } });
 };
 const emitDeleteAction = (item: any) => {
   console.log(item);
@@ -77,7 +79,7 @@ getDocsFunction();
       title="Reporte Documentos"
       :showActions="true"
       :searchProperties="searchProperties"
-      @onEditAction="emitActionEdit"
+      @onEditAction="handleEdit"
       @onDeleteAction="emitDeleteAction"
     />
     <!--   <TableCustomPaginateComponent

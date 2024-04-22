@@ -9,4 +9,9 @@ export const DocumentosRoutes = [
     name: "crear-documentos",
     component: () => import("@/views/Documentos/DocumentosCrear.vue"),
   },
+  {
+    path: "editar/:id",
+    name: "editar-documentos",
+    component: () => import("@/views/Documentos/DocumentosEditar.vue"),
+  },
 ];
