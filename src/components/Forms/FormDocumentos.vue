@@ -40,11 +40,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { Documento } from "@/utils/interfaces/documents.ts";
+import { ref, watch } from "vue";
+import {
+  Documento,
+  defaultValuesDocumento,
+} from "@/utils/interfaces/documents.ts";
 
 const props = defineProps({
-  initialFormData: {
+  initialData: {
     type: Object as () => Documento,
     default: () => ({
       id: "",
@@ -55,10 +58,14 @@ const props = defineProps({
       date: "",
     }),
   },
+  editMode: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["onSubmit"]);
-const formData = ref(props.initialFormData);
+const formData = ref<Documento>(defaultValuesDocumento);
 
 const submitForm = () => {
   // Convertir los datos a formato JSON

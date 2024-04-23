@@ -17,9 +17,9 @@ const createDocumento = (dataDoc: Documento) =>
     method: "POST",
     data: dataDoc,
   });
-const updateDocs = (dataDoc: Documento) =>
+const updateDocs = (dataDoc: Documento, id: string) =>
   fetchApi({
-    url: `documentos/${dataDoc.id}/`,
+    url: `documentos/${id}/`,
     method: "PUT",
     data: dataDoc,
   });
