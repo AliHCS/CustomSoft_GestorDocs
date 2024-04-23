@@ -1,13 +1,19 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import router from "@/router";
+import DialogWithOutButton from "@/components/DialogWithOutButton.vue";
 import TableComponent from "@/components/TableComponent.vue";
 /* import TableCustomPaginateComponent from "@/components/TableCustomPaginateComponent.vue"; */
 import { getDocs } from "@/api/documents";
-import { Documento } from "@/utils/interfaces/documents";
+import {
+  Documento,
+  defaultValuesDocumento,
+} from "@/utils/interfaces/documents";
 
 const documentos = ref<Documento[]>([]);
+const dialog = ref(false);
 
+const documentoDataDelete = ref<Documento>(defaultValuesDocumento);
 const getDocsFunction = async () => {
   try {
     const { data } = await getDocs();
@@ -58,12 +64,13 @@ const headers = [
   { title: "Actions", key: "actions", sortable: false },
 ];
 
-const handleEdit = (data: Documento) => {
-  console.log(data.id);
-  router.push({ name: "editar-documentos", params: { id: data.id } });
+const handleEdit = (item: Documento) => {
+  router.push({ name: "editar-documentos", params: { id: item.id } });
 };
 const emitDeleteAction = (item: any) => {
-  console.log(item);
+  documentoDataDelete.value = item;
+  dialog.value = true;
+  console.log(documentoDataDelete.value);
 };
 
 const searchProperties = ref<string[]>(["extension", "document"]);
@@ -82,6 +89,31 @@ getDocsFunction();
       @onEditAction="handleEdit"
       @onDeleteAction="emitDeleteAction"
     />
+    <DialogWithOutButton v-model:dialog="dialog" :showAceptButton="true">
+      !-- Contenido que se insertará en el slot 'content' -->
+      <template v-slot:content>
+        <v-card
+          style="width: 100%; height: 100%"
+          max-width="800"
+          subtitle="Esta acción es irreversible"
+        >
+          <template v-slot:title>
+            <span class="font-weight-black" style="font-size: 20px"
+              >Eliminar el registro {{ documentoDataDelete.name }}?</span
+            >
+          </template>
+          <v-card-text class="bg-surface-light pt-4">
+            <!-- Cambio de Lorem Ipsum a una advertencia más adecuada -->
+            <p style="font-size: 16px; color: red">
+              ¡Atención! Estás a punto de eliminar el documento "{{
+                documentoDataDelete.name
+              }}". Esta acción es irreversible y eliminará permanentemente el
+              documento.
+            </p>
+          </v-card-text>
+        </v-card>
+      </template>
+    </DialogWithOutButton>
     <!--   <TableCustomPaginateComponent
       :headers="headers"
       :items="documentos"

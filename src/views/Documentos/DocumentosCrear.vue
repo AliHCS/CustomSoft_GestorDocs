@@ -81,7 +81,7 @@ const formData = ref<Documento>(defaultValuesDocumento);
 const itemId = ref<string>("");
 
 const submitForm = async () => {
-  const jsonData = {
+  const jsonData: Documento = {
     name: formData.value.name,
     description: formData.value.description,
     extension: formData.value.extension,
@@ -91,7 +91,7 @@ const submitForm = async () => {
   if (itemId.value !== "") {
     await updateDocs(jsonData, itemId.value);
   } else {
-    await createDocument(jsonData);
+    await createDocumento(jsonData);
   }
   showAlert("¡Formulario enviado con éxito!", 4000, "success"); // Muestra la alerta de éxito
   setTimeout(() => {

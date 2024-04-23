@@ -1,5 +1,5 @@
 export interface Documento {
-  id: number | string;
+  id?: number | string;
   name: string;
   description: string;
   extension: string;

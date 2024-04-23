@@ -31,6 +31,22 @@
       "document": "C:\\fakepath\\20240312-2123.pdf",
       "date": "2024-04-22",
       "id": "5a4b"
+    },
+    {
+      "id": "9a98",
+      "name": "prueba 2",
+      "description": "prueba 2",
+      "extension": ".pdf",
+      "document": "C:\\fakepath\\ficha_de_pago_313106530.pdf",
+      "date": "2024-04-22"
+    },
+    {
+      "id": "6e54",
+      "name": "123",
+      "description": ".txt",
+      "extension": ".txt",
+      "document": "C:\\fakepath\\ficha_de_pago_313106530.pdf",
+      "date": "2024-04-22"
     }
   ]
 }
