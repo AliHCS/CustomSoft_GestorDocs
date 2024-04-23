@@ -3,24 +3,32 @@
     <v-form @submit.prevent="submitForm">
       <v-text-field
         v-model="formData.name"
+        :error-messages="nameErrors"
+        :error="nameErrors.length > 0"
         label="Nombre"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="formData.description"
+        :error-messages="descriptionErrors"
+        :error="descriptionErrors.length > 0"
         label="Descripción"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="formData.extension"
+        :error-messages="extensionErrors"
+        :error="extensionErrors.length > 0"
         label="Extensión"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="formData.date"
+        :error-messages="dateErrors"
+        :error="dateErrors.length > 0"
         label="Fecha"
         type="date"
         required
@@ -32,7 +40,6 @@
         type="file"
         accept=".pdf,.doc,.docx,.txt"
         @change="handleFileChange"
-        required
       />
       <v-text-field
         v-else
@@ -66,6 +73,14 @@ import {
   Documento,
   defaultValuesDocumento,
 } from "@/utils/interfaces/documents";
+import {
+  nameErrors,
+  descriptionErrors,
+  extensionErrors,
+  dateErrors,
+  validateForm,
+  clearErrors,
+} from "@/utils/validations/documentosFormValidations";
 
 const route = useRoute();
 const router = useRouter();
@@ -84,12 +99,23 @@ const itemId = ref<string>("");
 const fileInput = ref<HTMLInputElement | null>(null);
 
 const submitForm = async () => {
+  validateForm(formData.value);
+
+  if (
+    nameErrors.value.length ||
+    descriptionErrors.value.length ||
+    extensionErrors.value.length ||
+    dateErrors.value.length
+  ) {
+    return;
+  }
+
   try {
     const jsonData: Documento = {
       name: formData.value.name,
       description: formData.value.description,
       extension: formData.value.extension,
-      document: formData.value.document, // Solo guardamos el nombre del archivo
+      document: formData.value.document,
       date: formData.value.date,
     };
     if (itemId.value !== "") {
@@ -117,7 +143,13 @@ const redirectToIndex = () => {
 };
 
 const resetForm = () => {
-  formData.value = defaultValuesDocumento;
+  formData.value.id = ".value";
+  formData.value.name = "";
+  formData.value.description = "";
+  formData.value.extension = "";
+  formData.value.document = "";
+  formData.value.date = "";
+  clearErrors();
 };
 
 const cancelForm = () => {

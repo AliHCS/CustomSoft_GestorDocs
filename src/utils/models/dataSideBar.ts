@@ -11,8 +11,4 @@ export const items = [
     title: "Nuevo Reporte",
     route: "crear-documentos", // Ruta para DocumentosCreate
   },
-  {
-    title: "Buzz",
-    route: "/", // Otra ruta (esto es un ejemplo, asegúrate de tener rutas válidas aquí)
-  },
 ];

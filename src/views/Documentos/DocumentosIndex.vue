@@ -87,8 +87,8 @@ const handleDelete = async () => {
   if (idToDelete !== undefined) {
     const stringIdToDelete = idToDelete.toString(); // Convertir a cadena
     await deleteDocs(stringIdToDelete);
+    showAlert("¡Registro eliminado con éxito!", 1000, "success");
     await getDocsFunction();
-    showAlert("¡Registro eliminado con éxito!", 4000, "success");
   } else {
     console.error("ID del documento a eliminar no está definido.");
   }
