@@ -1,14 +1,14 @@
 <template>
   <v-card class="mx-auto" max-width="344">
-    <v-img
-      height="200px"
-      src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-      cover
-    ></v-img>
+    <v-img :height="imageHeight" :src="imageUrl" cover></v-img>
 
-    <v-card-title> Top western road trips </v-card-title>
+    <v-card-title>
+      {{ title }}
+    </v-card-title>
 
-    <v-card-subtitle> 1,000 miles of wonder </v-card-subtitle>
+    <v-card-subtitle>
+      {{ subtitle }}
+    </v-card-subtitle>
 
     <v-card-actions>
       <v-btn color="orange-lighten-2" text="Explore"></v-btn>
@@ -26,20 +26,38 @@
         <v-divider></v-divider>
 
         <v-card-text>
-          I'm a thing. But, like most politicians, he promised more than he
-          could deliver. You won't have time for sleeping, soldier, not with all
-          the bed making you'll be doing. Then we'll go with that data file!
-          Hey, you add a one and two zeros to that or we walk! You're going to
-          do his laundry? I've got to find a way to escape.
+          {{ text }}
         </v-card-text>
       </div>
     </v-expand-transition>
   </v-card>
 </template>
-<script>
-export default {
-  data: () => ({
-    show: false,
-  }),
-};
+
+<script setup lang="ts">
+import { ref } from "vue";
+
+const props = defineProps({
+  imageUrl: {
+    type: String,
+    default: "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+  },
+  imageHeight: {
+    type: String,
+    default: "200px",
+  },
+  title: {
+    type: String,
+    default: "Default Title",
+  },
+  subtitle: {
+    type: String,
+    default: "Default Subtitle",
+  },
+  text: {
+    type: String,
+    default: "Default Text",
+  },
+});
+
+const show = ref(false);
 </script>

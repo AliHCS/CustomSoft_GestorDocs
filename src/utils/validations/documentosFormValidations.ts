@@ -84,12 +84,15 @@ export const validateForm = (formData: Documento) => {
     (value: string) => !!value
   );
 
-  // Validación adicional para 'date'
-  if (formData.date) {
-    const today = new Date();
-    const selectedDate = new Date(formData.date);
-    if (selectedDate > today) {
-      dateErrors.value.push("La fecha no puede ser mayor que el día de hoy");
+  // Validación adicional para 'date' utilizando validateField
+  validateField(
+    formData.date,
+    dateErrors,
+    "La fecha no puede ser mayor que el día de hoy",
+    (value: string) => {
+      const today = new Date();
+      const selectedDate = new Date(value);
+      return selectedDate <= today; // Devuelve true si la fecha es igual o anterior al día de hoy
     }
-  }
+  );
 };
