@@ -15,24 +15,77 @@ export const clearErrors = () => {
   dateErrors.value = [];
 };
 
+// Función de validación genérica
+const validateField = (
+  value: any,
+  errors: any,
+  errorMessage: string,
+  validationFn: (value: any) => boolean
+) => {
+  if (!validationFn(value)) {
+    errors.value.push(errorMessage);
+  }
+};
+
 export const validateForm = (formData: Documento) => {
   clearErrors();
 
-  if (!formData.name) {
-    nameErrors.value.push("El nombre es requerido");
-  }
+  // Validaciones para el campo 'name'
+  validateField(
+    formData.name,
+    nameErrors,
+    "El nombre es requerido",
+    (value: string) => !!value
+  );
 
-  if (!formData.description) {
-    descriptionErrors.value.push("La descripción es requerida");
-  }
+  // Validaciones adicionales para 'name'
+  validateField(
+    formData.name,
+    nameErrors,
+    "El nombre debe tener al menos 3 caracteres",
+    (value: string) => value.length >= 3
+  );
 
-  if (!formData.extension) {
-    extensionErrors.value.push("La extensión es requerida");
-  }
+  validateField(
+    formData.name,
+    nameErrors,
+    "El nombre no puede tener más de 50 caracteres",
+    (value: string) => value.length <= 50
+  );
 
-  if (!formData.date) {
-    dateErrors.value.push("La fecha es requerida");
-  } else {
+  validateField(
+    formData.name,
+    nameErrors,
+    "El nombre no puede contener caracteres especiales",
+    (value: string) => /^[a-zA-Z0-9 ]+$/.test(value)
+  );
+
+  // Validaciones para el campo 'description'
+  validateField(
+    formData.description,
+    descriptionErrors,
+    "La descripción es requerida",
+    (value: string) => !!value
+  );
+
+  // Validaciones para el campo 'extension'
+  validateField(
+    formData.extension,
+    extensionErrors,
+    "La extensión es requerida",
+    (value: string) => !!value
+  );
+
+  // Validaciones para el campo 'date'
+  validateField(
+    formData.date,
+    dateErrors,
+    "La fecha es requerida",
+    (value: string) => !!value
+  );
+
+  // Validación adicional para 'date'
+  if (formData.date) {
     const today = new Date();
     const selectedDate = new Date(formData.date);
     if (selectedDate > today) {
