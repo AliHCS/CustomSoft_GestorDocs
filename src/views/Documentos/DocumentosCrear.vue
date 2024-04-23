@@ -38,7 +38,7 @@
         ref="fileInput"
         v-if="!itemId"
         type="file"
-        accept=".pdf,.doc,.docx,.txt"
+        accept=".pdf,.doc,.docx"
         @change="handleFileChange"
       />
       <v-text-field

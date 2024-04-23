@@ -75,7 +75,16 @@ export const validateForm = (formData: Documento) => {
     "La extensión es requerida",
     (value: string) => !!value
   );
-
+  // Validación adicional para 'extension' para verificar si es "pdf" o "docx"
+  validateField(
+    formData.extension,
+    extensionErrors,
+    "La extensión debe ser PDF o DOCX",
+    (value: string) => {
+      const validExtensions = ["pdf", "docx"];
+      return validExtensions.includes(value.toLowerCase()); // Devuelve true si la extensión está en la lista de permitidas
+    }
+  );
   // Validaciones para el campo 'date'
   validateField(
     formData.date,
