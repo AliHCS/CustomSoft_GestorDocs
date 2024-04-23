@@ -26,18 +26,19 @@
         required
       ></v-text-field>
 
-      <v-text-field
+      <input
+        ref="fileInput"
         v-if="!itemId"
-        v-model="formData.document"
-        label="Seleccionar Archivo"
         type="file"
         accept=".pdf,.doc,.docx,.txt"
+        @change="handleFileChange"
         required
-      ></v-text-field>
+      />
       <v-text-field
         v-else
         v-model="formData.document"
         label="Archivo"
+        disabled
       ></v-text-field>
 
       <!-- Botones en la misma línea y a la derecha -->
@@ -59,7 +60,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import AlertComponent from "@/components/AlertComponent.vue";
-import { useAlert } from "@/composables/useAlert"; // Importa useAlert
+import { useAlert } from "@/composables/useAlert";
 import { createDocumento, getDocsById, updateDocs } from "@/api/documents";
 import {
   Documento,
@@ -75,28 +76,44 @@ const {
   alertMessage,
   alertTimeout,
   alertColor,
-} = useAlert(); // Usa useAlert
+} = useAlert();
 
 const formData = ref<Documento>(defaultValuesDocumento);
 const itemId = ref<string>("");
 
+const fileInput = ref<HTMLInputElement | null>(null);
+
 const submitForm = async () => {
-  const jsonData: Documento = {
-    name: formData.value.name,
-    description: formData.value.description,
-    extension: formData.value.extension,
-    document: formData.value.document,
-    date: formData.value.date,
-  };
-  if (itemId.value !== "") {
-    await updateDocs(jsonData, itemId.value);
-  } else {
-    await createDocumento(jsonData);
+  try {
+    const jsonData: Documento = {
+      name: formData.value.name,
+      description: formData.value.description,
+      extension: formData.value.extension,
+      document: formData.value.document, // Solo guardamos el nombre del archivo
+      date: formData.value.date,
+    };
+    if (itemId.value !== "") {
+      await updateDocs(jsonData, itemId.value);
+    } else {
+      await createDocumento(jsonData);
+    }
+    showAlert("¡Formulario enviado con éxito!", 4000, "success");
+    resetForm();
+    redirectToIndex();
+  } catch (error) {
+    console.error("Error al enviar formulario:", error);
+    showAlert("Ocurrió un error al enviar el formulario", 4000, "error");
   }
-  showAlert("¡Formulario enviado con éxito!", 4000, "success"); // Muestra la alerta de éxito
+};
+
+const redirectToIndex = () => {
   setTimeout(() => {
-    router.push({ name: "index-documentos" });
-  }, 5000);
+    try {
+      router.push({ name: "index-documentos" });
+    } catch (error) {
+      console.error("Error al redirigir:", error);
+    }
+  }, 4000);
 };
 
 const resetForm = () => {
@@ -108,11 +125,25 @@ const cancelForm = () => {
   router.push({ name: "index-documentos" });
 };
 
+const handleFileChange = (event: Event) => {
+  const target = event.target as HTMLInputElement;
+  if (target.files && target.files.length > 0) {
+    formData.value.document = target.files[0].name;
+  } else {
+    formData.value.document = "";
+  }
+};
+
 onMounted(async () => {
-  itemId.value = route.params.id ? route.params.id.toString() : "";
-  if (itemId.value) {
-    const { data } = await getDocsById(itemId.value);
-    formData.value = data;
+  try {
+    itemId.value = route.params.id ? route.params.id.toString() : "";
+    if (itemId.value) {
+      const { data } = await getDocsById(itemId.value);
+      formData.value = data;
+    }
+  } catch (error) {
+    console.error("Error al obtener documento por ID:", error);
+    showAlert("Ocurrió un error al obtener el documento", 4000, "error");
   }
 });
 </script>

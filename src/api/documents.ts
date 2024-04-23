@@ -23,5 +23,10 @@ const updateDocs = (dataDoc: Documento, id: string) =>
     method: "PUT",
     data: dataDoc,
   });
+const deleteDocs = (id: string) =>
+  fetchApi({
+    url: `documentos/${id}/`,
+    method: "DELETE",
+  });
 
-export { getDocs, getDocsById, createDocumento, updateDocs };
+export { getDocs, getDocsById, createDocumento, updateDocs, deleteDocs };

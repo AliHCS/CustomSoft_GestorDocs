@@ -3,17 +3,27 @@ import { ref } from "vue";
 import router from "@/router";
 import DialogWithOutButton from "@/components/DialogWithOutButton.vue";
 import TableComponent from "@/components/TableComponent.vue";
+import AlertComponent from "@/components/AlertComponent.vue";
 /* import TableCustomPaginateComponent from "@/components/TableCustomPaginateComponent.vue"; */
-import { getDocs } from "@/api/documents";
+import { useAlert } from "@/composables/useAlert";
+import { getDocs, deleteDocs } from "@/api/documents";
 import {
   Documento,
   defaultValuesDocumento,
 } from "@/utils/interfaces/documents";
 
+const {
+  showAlert,
+  showAlertComponent,
+  alertMessage,
+  alertTimeout,
+  alertColor,
+} = useAlert(); // Usa useAlert
+
 const documentos = ref<Documento[]>([]);
 const dialog = ref(false);
 
-const documentoDataDelete = ref<Documento>(defaultValuesDocumento);
+const documentoDataDelete = ref<Documento>({ ...defaultValuesDocumento });
 const getDocsFunction = async () => {
   try {
     const { data } = await getDocs();
@@ -67,10 +77,21 @@ const headers = [
 const handleEdit = (item: Documento) => {
   router.push({ name: "editar-documentos", params: { id: item.id } });
 };
-const emitDeleteAction = (item: any) => {
+const emitDeleteAction = async (item: any) => {
   documentoDataDelete.value = item;
   dialog.value = true;
-  console.log(documentoDataDelete.value);
+};
+
+const handleDelete = async () => {
+  const idToDelete = documentoDataDelete.value.id;
+  if (idToDelete !== undefined) {
+    const stringIdToDelete = idToDelete.toString(); // Convertir a cadena
+    await deleteDocs(stringIdToDelete);
+    await getDocsFunction();
+    showAlert("¡Registro eliminado con éxito!", 4000, "success");
+  } else {
+    console.error("ID del documento a eliminar no está definido.");
+  }
 };
 
 const searchProperties = ref<string[]>(["extension", "document"]);
@@ -89,8 +110,11 @@ getDocsFunction();
       @onEditAction="handleEdit"
       @onDeleteAction="emitDeleteAction"
     />
-    <DialogWithOutButton v-model:dialog="dialog" :showAceptButton="true">
-      !-- Contenido que se insertará en el slot 'content' -->
+    <DialogWithOutButton
+      v-model:dialog="dialog"
+      :showAceptButton="true"
+      @accepted="handleDelete"
+    >
       <template v-slot:content>
         <v-card
           style="width: 100%; height: 100%"
@@ -122,6 +146,12 @@ getDocsFunction();
       @onEditAction="emitActionEdit"
       @onDeleteAction="emitDeleteAction"
     /> -->
+    <AlertComponent
+      v-if="showAlertComponent"
+      :message="alertMessage"
+      :timeout="alertTimeout"
+      :color="alertColor"
+    />
   </div>
 </template>
 

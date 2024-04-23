@@ -43,11 +43,8 @@ const emit = defineEmits();
 const closeDialog = () => emit("update:dialog", false);
 
 const handleAccept = () => {
-  // Aquí puedes agregar la lógica que deseas ejecutar cuando se hace clic en "Aceptar"
-  console.log("Aceptar clicked");
+  emit("accepted");
   emit("update:dialog", false);
-  // Puedes emitir un evento si es necesario
-  // emit("accepted");
 };
 </script>
 
