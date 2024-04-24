@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" prominent>
+  <v-app-bar color="indigo-lighten-1" prominent>
     <!-- Hacer clic en el icono cambia el valor de "drawer" -->
     <v-app-bar-nav-icon
       variant="text"
