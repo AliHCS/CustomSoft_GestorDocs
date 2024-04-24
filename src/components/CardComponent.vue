@@ -1,13 +1,13 @@
 <template>
   <v-card class="mx-auto" max-width="344">
-    <v-img :height="imageHeight" :src="imageUrl" cover></v-img>
+    <v-img :height="props.imageHeight" :src="props.imageUrl" cover></v-img>
 
     <v-card-title>
-      {{ title }}
+      {{ props.title }}
     </v-card-title>
 
     <v-card-subtitle>
-      {{ subtitle }}
+      {{ props.subtitle }}
     </v-card-subtitle>
 
     <v-card-actions>
@@ -26,7 +26,7 @@
         <v-divider></v-divider>
 
         <v-card-text>
-          {{ text }}
+          {{ props.text }}
         </v-card-text>
       </div>
     </v-expand-transition>
