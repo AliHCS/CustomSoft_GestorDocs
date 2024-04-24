@@ -7,6 +7,7 @@
         :icon="icon"
         class="mx-4"
         variant="text"
+        @click="redirectToSocial(icon)"
       ></v-btn>
     </div>
 
@@ -25,6 +26,26 @@
     <div>{{ new Date().getFullYear() }} — <strong>Vuetify</strong></div>
   </v-footer>
 </template>
-<script setup>
+
+<script setup lang="ts">
 const icons = ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"];
+
+const redirectToSocial = (icon: any) => {
+  switch (icon) {
+    case "mdi-facebook":
+      window.open("https://www.facebook.com/zuck", "_blank");
+      break;
+    case "mdi-twitter":
+      window.open("https://twitter.com/elonmusk", "_blank");
+      break;
+    case "mdi-linkedin":
+      window.open("https://www.linkedin.com/in/ali-gomez-47b8271a7/", "_blank");
+      break;
+    case "mdi-instagram":
+      window.open("https://www.instagram.com/zuck", "_blank");
+      break;
+    default:
+      break;
+  }
+};
 </script>

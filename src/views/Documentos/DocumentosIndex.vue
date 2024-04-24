@@ -25,7 +25,9 @@ const dialog = ref(false);
 
 const documentoDataDelete = ref<Documento>({ ...defaultValuesDocumento });
 const getDocsFunction = async () => {
+  /* const params = { _page: 1, _per_page: 3 }; */
   try {
+    /* const { data } = await getDocs(params); */
     const { data } = await getDocs();
     documentos.value = data;
     console.log(documentos.value);

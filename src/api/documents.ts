@@ -1,10 +1,11 @@
-import fetchApi from "@/api/api.ts";
+import fetchApi from "@/api/api";
 import { Documento } from "@/utils/interfaces/documents";
 
-const getDocs = () =>
+const getDocs = (params?: any) =>
   fetchApi({
     url: "documentos",
     method: "GET",
+    params: params ? params : {},
   });
 const getDocsById = (id: string) =>
   fetchApi({
