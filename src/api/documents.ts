@@ -5,7 +5,7 @@ const getDocs = (params?: any) =>
   fetchApi({
     url: "documentos",
     method: "GET",
-    params: params ? params : null,
+    params: params ? params : undefined,
   });
 const getDocsById = (id: string) =>
   fetchApi({
