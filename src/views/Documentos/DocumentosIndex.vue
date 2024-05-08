@@ -97,7 +97,11 @@ const handleDelete = async () => {
   }
 };
 
-const searchProperties = ref<string[]>(["extension", "document"]);
+const searchProperties = ref<string[]>([
+  "extension",
+  "document",
+  "description",
+]);
 
 getDocsFunction();
 </script>

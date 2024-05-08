@@ -79,6 +79,22 @@
       "extension": ".pdf",
       "document": " ficha_de_pago_313106530.pdf",
       "date": "2024-04-22"
+    },
+    {
+      "id": "62d9",
+      "name": "Prueba",
+      "description": " prueba 2 para busqueda",
+      "extension": "pdf",
+      "document": "VueJS-atajos.pdf",
+      "date": "2024-05-08"
+    },
+    {
+      "id": "926d",
+      "name": "prueba 3 ",
+      "description": "prueba 3 con extension validacion",
+      "extension": "pdf",
+      "document": "VueJS-atajos.pdf",
+      "date": "2024-05-08"
     }
   ]
 }
