@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import { HomeView, DocumentosRoutes } from "@/router/exports";
+import { HomeView, DocumentosRoutes, Page404 } from "@/router/exports";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -11,6 +11,11 @@ const routes: RouteRecordRaw[] = [
     path: "/documentos",
     name: "documentos",
     children: DocumentosRoutes,
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "Page404",
+    component: Page404,
   },
   // Otras rutas de tu aplicación
 ];
